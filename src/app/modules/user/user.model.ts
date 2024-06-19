@@ -1,10 +1,12 @@
 import { Schema, model } from 'mongoose';
-import { TUser } from './user.interface';
+import { TUser, UserModel } from './user.interface';
 import validator from 'validator';
-import AppError from '../../errors/appError';
 import httpStatus from 'http-status';
+import bcrypt from 'bcrypt';
+import config from '../../config';
+import AppError from '../../errors/AppError';
 
-const userSchema = new Schema<TUser>(
+const userSchema = new Schema<TUser, UserModel>(
   {
     name: {
       type: String,
@@ -52,6 +54,16 @@ const userSchema = new Schema<TUser>(
     timestamps: true,
   },
 );
+// password hashing middleware
+userSchema.pre('save', async function (next) {
+  // hashing password and save into DB
+  this.password = await bcrypt.hash(
+    this.password,
+    Number(config.bcrypt_salt_rounds),
+  );
+  next();
+});
+// Middleware for check user exist
 userSchema.pre('save', async function (next) {
   const isUserExist = await User.findOne({email: this.email});
 
@@ -62,5 +74,11 @@ userSchema.pre('save', async function (next) {
     );
   }
   next()
-})
-export const User = model<TUser>('User', userSchema);
+});
+userSchema.statics.isUserExistsByEmail = async function(email){
+  return await User.findOne({email: email}).select('+password');
+}
+userSchema.statics.isPasswordMatched = async function(plainTextPassword, hashedPassword){
+  return await bcrypt.compare(plainTextPassword, hashedPassword)
+}
+export const User = model<TUser, UserModel>('User', userSchema);

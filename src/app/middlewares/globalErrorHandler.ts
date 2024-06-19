@@ -4,9 +4,9 @@ import { TErrorMessages } from '../interface/error';
 import config from '../config';
 import { handleZodError } from '../errors/handleZodError';
 import handleValidationError from '../errors/handleValidationError';
-import AppError from '../errors/appError';
 import handleCastError from '../errors/handleCastError';
 import handleDuplicateError from '../errors/handleDuplicateError';
+import AppError from '../errors/AppError';
 
 const globalErrorHandler: ErrorRequestHandler = (error, req, res, next) => {
   // Setting default values
