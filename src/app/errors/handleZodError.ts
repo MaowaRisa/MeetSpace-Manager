@@ -13,7 +13,7 @@ export const handleZodError = (error: ZodError): TGenericErrorResponse => {
   });
   return {
     statusCode,
-    message: errorMessages.map(err => err.message).join(' | '),
+    message: errorMessages.map(err => `${err.path} ${err.message}`).join(' | '),
     errorMessages,
   };
 };
