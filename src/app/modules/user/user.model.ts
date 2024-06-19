@@ -1,6 +1,8 @@
 import { Schema, model } from 'mongoose';
 import { TUser } from './user.interface';
 import validator from 'validator';
+import AppError from '../../errors/appError';
+import httpStatus from 'http-status';
 
 const userSchema = new Schema<TUser>(
   {
@@ -50,4 +52,15 @@ const userSchema = new Schema<TUser>(
     timestamps: true,
   },
 );
+userSchema.pre('save', async function (next) {
+  const isUserExist = await User.findOne({email: this.email});
+
+  if (isUserExist){
+    throw new AppError(
+      httpStatus.NOT_FOUND,
+      'Email is already exist!',
+    );
+  }
+  next()
+})
 export const User = model<TUser>('User', userSchema);
