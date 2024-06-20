@@ -12,7 +12,7 @@ const userSchema = new Schema<TUser, UserModel>(
       type: String,
       required: [true, 'Name is required!'],
       trim: true,
-      maxlength: [20, 'Name con not exceed 20 characters!'],
+      maxlength: [20, 'Name can not exceed 20 characters!'],
     },
     email: {
       type: String,

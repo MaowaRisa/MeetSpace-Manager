@@ -12,7 +12,8 @@ import { User } from '../modules/user/user.model';
 // }
 const auth = (...requiredRoles: TUserRole[]) => {
   return catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    const token = req.headers.authorization;
+    const tokenWithBearer = req.headers.authorization;
+    const token = tokenWithBearer?.split(' ')[1];
     // Check if the token is sent from the client
     if (!token) {
       throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized!');
