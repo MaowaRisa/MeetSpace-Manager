@@ -19,5 +19,11 @@ router.get(
   auth(USER_ROLE.admin),
   BookingControllers.getAllBookings
 );
+const userBookingRoutes = express.Router();
+userBookingRoutes.get(
+  '/',
+  auth(USER_ROLE.user),
+  BookingControllers.getBookingsByUser
+);
 
-export const bookingRoutes = router;
+export {router as bookingRoutes, userBookingRoutes};

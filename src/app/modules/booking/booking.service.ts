@@ -103,7 +103,22 @@ const getAllBookingsFromDB = async() =>{
       });
      return result;
 }
+const getBookingsByUserFromDB = async(email: string) =>{
+    const isUserExist = await User.isUserExistsByEmail(email);
+    const results = await Booking.findOne({user: isUserExist?._id}).select(selectedFieldsBooking).populate({
+        path: 'slots',
+        select: selectedFieldsForSlot
+      }).populate({
+        path: 'room',
+        select: selectedFieldsForRoom
+      }).populate({
+        path: 'user',
+        select: selectedFieldsForUser
+      });;
+    return results;
+}
 export const BookingServices = {
   createBookingIntoDB,
-  getAllBookingsFromDB
+  getAllBookingsFromDB,
+  getBookingsByUserFromDB
 };
