@@ -4,10 +4,8 @@ import { QueryParameters, TSlot } from './slot.interface';
 import { Slot } from './slot.model';
 import { generateSlots, hasConflict } from './slot.utils';
 import { Room } from '../room/room.model';
-
-const selectedFields = '_id room date startTime endTime isBooked';
-const selectedFieldsForRoom =
-  '_id name roomNo floorNo capacity pricePerSlot amenities isDeleted';
+import { selectedFieldsForSlot } from './slot.constants';
+import { selectedFieldsForRoom } from '../room/room.constants';
 
 const createSlotIntoDB = async (payload: TSlot) => {
   // check if room available
@@ -38,9 +36,7 @@ const createSlotIntoDB = async (payload: TSlot) => {
   const slotsData = await Slot.insertMany(slots);
 
   const insertedSlotIds = slotsData.map((slot) => slot._id);
-  const result = await Slot.find({ _id: { $in: insertedSlotIds } }).select(
-    selectedFields,
-  );
+  const result = await Slot.find({ _id: { $in: insertedSlotIds } }).select(selectedFieldsForSlot);
 
   return result;
 };
@@ -64,7 +60,7 @@ const getAvailableSlotsFromDB = async (query: Record<string, unknown>) => {
   if (roomId) {
     queryData.room = roomId;
   }
-  const result = await Slot.find(queryData).select(selectedFields).populate({
+  const result = await Slot.find(queryData).select(selectedFieldsForSlot).populate({
     path: 'room',
     select: selectedFieldsForRoom,
   });

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 // check if a date is today or in the future
-const todayOrLaterDateRefinement = (date: z.ZodString) =>
+export const todayOrLaterDateRefinement = (date: z.ZodString) =>
   date.refine(
     (value) => {
       const now = new Date();
@@ -11,7 +11,7 @@ const todayOrLaterDateRefinement = (date: z.ZodString) =>
     {
       message: 'choose today or any day after today',
     },
-  );
+);
 const timeStringSchema = z.string().refine(
   (time) => {
     const regex = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/; // 00-09 10-19 20-23

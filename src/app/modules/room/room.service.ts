@@ -2,8 +2,7 @@ import httpStatus from 'http-status';
 import AppError from '../../errors/AppError';
 import { TRoom } from './room.interface';
 import { Room } from './room.model';
-
-const selectedFieldsForRoom = '_id name roomNo floorNo capacity pricePerSlot amenities isDeleted';
+import { selectedFieldsForRoom } from './room.constants';
 
 const createRoomIntoDB = async (payload: TRoom) => {
   const result = await Room.create(payload);
@@ -11,14 +10,18 @@ const createRoomIntoDB = async (payload: TRoom) => {
   return newRoom;
 };
 const getSingleRoomFromDB = async (id: string) => {
-  const result = await Room.findOne({ _id: id, isDeleted: false }).select(selectedFieldsForRoom);
+  const result = await Room.findOne({ _id: id, isDeleted: false }).select(
+    selectedFieldsForRoom,
+  );
   if (!result) {
     throw new AppError(httpStatus.NOT_FOUND, 'Room not found');
   }
   return result;
 };
 const getAllRoomsFromDB = async () => {
-  const result = await Room.find({ isDeleted: false }).select(selectedFieldsForRoom);
+  const result = await Room.find({ isDeleted: false }).select(
+    selectedFieldsForRoom,
+  );
   if (result.length === 0) {
     throw new AppError(httpStatus.NOT_FOUND, 'No rooms available');
   }

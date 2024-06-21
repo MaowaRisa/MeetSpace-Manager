@@ -4,12 +4,11 @@ import { User } from './user.model';
 import { createToken } from './user.utils';
 import config from '../../config';
 import AppError from '../../errors/AppError';
+import { selectedFieldsForUser } from './user.constants';
 
 const createUserIntoDB = async (payload: TUser) => {
   const result = await User.create(payload);
-  const newUser = await User.findById(result._id).select(
-    '_id name email phone role address',
-  );
+  const newUser = await User.findById(result._id).select(selectedFieldsForUser);
   return newUser;
 };
 const loginUser = async (payload: TLoginUser) => {
@@ -28,9 +27,7 @@ const loginUser = async (payload: TLoginUser) => {
     email: user.email,
     role: user.role,
   };
-  const userDetails = await User.findOne({ email: user.email }).select(
-    '_id name email phone role address',
-  );
+  const userDetails = await User.findOne({ email: user.email }).select(selectedFieldsForUser);
 
   const accessToken = createToken(
     jwtPayload,

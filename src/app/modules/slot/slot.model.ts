@@ -30,8 +30,8 @@ const roomSchema = new Schema<TSlot, SlotModel>(
   },
 );
 
-roomSchema.statics.isRoomExists = async function (id) {
-  return await Slot.findOne({ _id: id, isDeleted: false });
+roomSchema.statics.isSlotExists = async function (id) {
+  return await Slot.findOne({ _id: id, isBooked: false });
 };
 
 export const Slot = model<TSlot, SlotModel>('Slot', roomSchema);
