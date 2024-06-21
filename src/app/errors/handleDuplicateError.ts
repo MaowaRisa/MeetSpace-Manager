@@ -3,7 +3,6 @@
 import { TErrorMessages, TGenericErrorResponse } from '../interface/error';
 
 const handleDuplicateError = (error: any): TGenericErrorResponse => {
-
   const errorMessages: TErrorMessages = [
     {
       path: '',

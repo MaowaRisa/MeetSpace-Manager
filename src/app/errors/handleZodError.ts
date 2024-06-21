@@ -1,7 +1,6 @@
 import { ZodError, ZodIssue } from 'zod';
 import { TErrorMessages, TGenericErrorResponse } from '../interface/error';
 
-
 export const handleZodError = (error: ZodError): TGenericErrorResponse => {
   const statusCode = 400;
 
@@ -13,7 +12,9 @@ export const handleZodError = (error: ZodError): TGenericErrorResponse => {
   });
   return {
     statusCode,
-    message: errorMessages.map(err => `${err.path} ${err.message}`).join(' | '),
+    message: errorMessages
+      .map((err) => `${err.path} ${err.message}`)
+      .join(' | '),
     errorMessages,
   };
 };

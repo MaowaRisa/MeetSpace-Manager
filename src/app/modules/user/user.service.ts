@@ -23,22 +23,24 @@ const loginUser = async (payload: TLoginUser) => {
   if (!(await User.isPasswordMatched(payload.password, user.password))) {
     throw new AppError(httpStatus.FORBIDDEN, 'Wrong credentials!');
   }
-  // token generate and send it to the client 
+  // token generate and send it to the client
   const jwtPayload = {
     email: user.email,
     role: user.role,
-  }
-  const userDetails = await User.findOne({email: user.email}).select('_id name email phone role address')
+  };
+  const userDetails = await User.findOne({ email: user.email }).select(
+    '_id name email phone role address',
+  );
 
   const accessToken = createToken(
     jwtPayload,
     config.jwt_access_secret as string,
-    config.jwt_access_expires_in as string
-  )
-  
+    config.jwt_access_expires_in as string,
+  );
+
   return {
     accessToken,
-    userDetails
+    userDetails,
   };
 };
 export const UserServices = {

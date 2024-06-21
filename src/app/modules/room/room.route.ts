@@ -22,5 +22,5 @@ router.put(
   validateRequest(roomValidation.updateRoomValidationSchema),
   RoomControllers.updateRoom,
 );
-router.delete('/:id',auth(USER_ROLE.admin), RoomControllers.deleteRoom)
+router.delete('/:id', auth(USER_ROLE.admin), RoomControllers.deleteRoom);
 export const roomRoutes = router;

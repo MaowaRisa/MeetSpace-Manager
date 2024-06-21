@@ -68,5 +68,5 @@ export const RoomControllers = {
   getSingleRoom,
   getAllRooms,
   updateRoom,
-  deleteRoom
+  deleteRoom,
 };

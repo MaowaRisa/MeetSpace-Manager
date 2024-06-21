@@ -8,17 +8,20 @@ export interface TUser {
   phone: string;
   address: string;
   role: 'user' | 'admin';
-};
+}
 export type TLoginUser = {
   email: string;
   password: string;
 };
 export interface UserModel extends Model<TUser> {
   isUserExistsByEmail(id: string): Promise<TUser | null>;
-  isPasswordMatched(plaintextPassword: string, hashedPassword: string): Promise<boolean>;
+  isPasswordMatched(
+    plaintextPassword: string,
+    hashedPassword: string,
+  ): Promise<boolean>;
 }
 export type TJwtPayload = {
-    email: string;
-    role: string;
-}
+  email: string;
+  role: string;
+};
 export type TUserRole = keyof typeof USER_ROLE;

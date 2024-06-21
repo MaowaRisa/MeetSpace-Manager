@@ -65,20 +65,20 @@ userSchema.pre('save', async function (next) {
 });
 // Middleware for check user exist
 userSchema.pre('save', async function (next) {
-  const isUserExist = await User.findOne({email: this.email});
+  const isUserExist = await User.findOne({ email: this.email });
 
-  if (isUserExist){
-    throw new AppError(
-      httpStatus.NOT_FOUND,
-      'Email is already exist!',
-    );
+  if (isUserExist) {
+    throw new AppError(httpStatus.NOT_FOUND, 'Email is already exist!');
   }
-  next()
+  next();
 });
-userSchema.statics.isUserExistsByEmail = async function(email){
-  return await User.findOne({email: email}).select('+password');
-}
-userSchema.statics.isPasswordMatched = async function(plainTextPassword, hashedPassword){
-  return await bcrypt.compare(plainTextPassword, hashedPassword)
-}
+userSchema.statics.isUserExistsByEmail = async function (email) {
+  return await User.findOne({ email: email }).select('+password');
+};
+userSchema.statics.isPasswordMatched = async function (
+  plainTextPassword,
+  hashedPassword,
+) {
+  return await bcrypt.compare(plainTextPassword, hashedPassword);
+};
 export const User = model<TUser, UserModel>('User', userSchema);

@@ -11,20 +11,20 @@ const createRoomIntoDB = async (payload: TRoom) => {
   return newRoom;
 };
 const getSingleRoomFromDB = async (id: string) => {
-  const result = await Room.findOne({_id:id, isDeleted: false}).select(
+  const result = await Room.findOne({ _id: id, isDeleted: false }).select(
     '_id name roomNo floorNo capacity pricePerSlot amenities isDeleted',
   );
-  if(!result){
-    throw new AppError(httpStatus.NOT_FOUND, "Room not found")
+  if (!result) {
+    throw new AppError(httpStatus.NOT_FOUND, 'Room not found');
   }
   return result;
 };
 const getAllRoomsFromDB = async () => {
-  const result = await Room.find({isDeleted: false}).select(
+  const result = await Room.find({ isDeleted: false }).select(
     '_id name roomNo floorNo capacity pricePerSlot amenities isDeleted',
   );
-  if(result.length === 0){
-    throw new AppError(httpStatus.NOT_FOUND, "No rooms available")
+  if (result.length === 0) {
+    throw new AppError(httpStatus.NOT_FOUND, 'No rooms available');
   }
   return result;
 };
@@ -45,11 +45,13 @@ const deleteRoomFromDB = async (id: string) => {
   if (!room) {
     throw new AppError(httpStatus.NOT_FOUND, 'Room not found');
   }
-  const updatedRoom = await Room.findByIdAndUpdate(id, {isDeleted: true}, {
-    new: true,
-  }).select(
-    '_id name roomNo floorNo capacity pricePerSlot amenities isDeleted',
-  );
+  const updatedRoom = await Room.findByIdAndUpdate(
+    id,
+    { isDeleted: true },
+    {
+      new: true,
+    },
+  ).select('_id name roomNo floorNo capacity pricePerSlot amenities isDeleted');
   return updatedRoom;
 };
 export const RoomServices = {
@@ -57,5 +59,5 @@ export const RoomServices = {
   getSingleRoomFromDB,
   getAllRoomsFromDB,
   updateRoomIntoDB,
-  deleteRoomFromDB
+  deleteRoomFromDB,
 };

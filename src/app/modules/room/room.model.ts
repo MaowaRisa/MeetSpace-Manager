@@ -26,14 +26,14 @@ const roomSchema = new Schema<TRoom, RoomModel>(
       type: Number,
       required: [true, 'Price per slot is required'],
     },
-    amenities:{
-        type: [String],
-        required: [true, "Amenities are required"]
+    amenities: {
+      type: [String],
+      required: [true, 'Amenities are required'],
     },
-    isDeleted:{
-        type: Boolean,
-        default: false
-    }
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
