@@ -17,7 +17,7 @@ router.post(
 router.get(
   '/',
   auth(USER_ROLE.admin),
-  BookingControllers.createBooking
+  BookingControllers.getAllBookings
 );
 
 export const bookingRoutes = router;

@@ -87,12 +87,21 @@ const totalAmount = foundSlotsIds.length * isRoomExists.pricePerSlot;
   }).populate({
     path: 'user',
     select: selectedFieldsForUser
-  })
+  });
   return result;
 };
 const getAllBookingsFromDB = async() =>{
-     const result = await Booking.find();
-     return result
+     const result = await Booking.find().select(selectedFieldsBooking).populate({
+        path: 'slots',
+        select: selectedFieldsForSlot
+      }).populate({
+        path: 'room',
+        select: selectedFieldsForRoom
+      }).populate({
+        path: 'user',
+        select: selectedFieldsForUser
+      });
+     return result;
 }
 export const BookingServices = {
   createBookingIntoDB,
