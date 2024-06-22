@@ -1,1 +1,1 @@
-export const selectedFieldsForSlot = '_id room date startTime endTime isBooked'
+export const selectedFieldsForSlot = '_id room date startTime endTime isBooked';

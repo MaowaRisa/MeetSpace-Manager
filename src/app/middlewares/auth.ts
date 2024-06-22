@@ -16,7 +16,10 @@ const auth = (...requiredRoles: TUserRole[]) => {
     const token = tokenWithBearer?.split(' ')[1];
     // Check if the token is sent from the client
     if (!token) {
-      throw new AppError(httpStatus.UNAUTHORIZED, 'You have no access to this route');
+      throw new AppError(
+        httpStatus.UNAUTHORIZED,
+        'You have no access to this route',
+      );
     }
     // token verify using try catch but as we are using catchAsync
     const decoded = jwt.verify(
@@ -32,7 +35,10 @@ const auth = (...requiredRoles: TUserRole[]) => {
     }
 
     if (requiredRoles && !requiredRoles.includes(role)) {
-      throw new AppError(httpStatus.UNAUTHORIZED, 'You have no access to this route');
+      throw new AppError(
+        httpStatus.UNAUTHORIZED,
+        'You have no access to this route',
+      );
     }
     req.user = decoded as JwtPayload;
     next();

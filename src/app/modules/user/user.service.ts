@@ -27,7 +27,9 @@ const loginUser = async (payload: TLoginUser) => {
     email: user.email,
     role: user.role,
   };
-  const userDetails = await User.findOne({ email: user.email }).select(selectedFieldsForUser);
+  const userDetails = await User.findOne({ email: user.email }).select(
+    selectedFieldsForUser,
+  );
 
   const accessToken = createToken(
     jwtPayload,

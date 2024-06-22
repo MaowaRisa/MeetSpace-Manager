@@ -13,5 +13,5 @@ router.post(
   validateRequest(slotValidation.createSlotValidationSchema),
   SlotControllers.createSlot,
 );
-router.get('/availability', SlotControllers.getAvailableSlots)
+router.get('/availability', SlotControllers.getAvailableSlots);
 export const slotRoutes = router;

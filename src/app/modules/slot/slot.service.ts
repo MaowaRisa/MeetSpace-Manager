@@ -36,7 +36,9 @@ const createSlotIntoDB = async (payload: TSlot) => {
   const slotsData = await Slot.insertMany(slots);
 
   const insertedSlotIds = slotsData.map((slot) => slot._id);
-  const result = await Slot.find({ _id: { $in: insertedSlotIds } }).select(selectedFieldsForSlot);
+  const result = await Slot.find({ _id: { $in: insertedSlotIds } }).select(
+    selectedFieldsForSlot,
+  );
 
   return result;
 };
@@ -60,10 +62,12 @@ const getAvailableSlotsFromDB = async (query: Record<string, unknown>) => {
   if (roomId) {
     queryData.room = roomId;
   }
-  const result = await Slot.find(queryData).select(selectedFieldsForSlot).populate({
-    path: 'room',
-    select: selectedFieldsForRoom,
-  });
+  const result = await Slot.find(queryData)
+    .select(selectedFieldsForSlot)
+    .populate({
+      path: 'room',
+      select: selectedFieldsForRoom,
+    });
   if (result.length === 0) {
     throw new AppError(httpStatus.NOT_FOUND, 'No slots available');
   }

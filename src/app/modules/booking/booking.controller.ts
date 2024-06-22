@@ -40,35 +40,35 @@ const getAllBookings: RequestHandler = catchAsync(async (req, res) => {
     });
   }
 });
-const getBookingsByUser: RequestHandler = catchAsync(async (req, res) =>{
-    const {email} = req.user;
-    const result = await BookingServices.getBookingsByUserFromDB(email);
-    if (result) {
-        sendResponse(res, {
-          success: true,
-          statusCode: httpStatus.OK,
-          message: 'User bookings retrieved successfully',
-          data: result,
-        });
-      }
-})
-const deleteBooking: RequestHandler = catchAsync(async (req, res) =>{
-    const {email} = req.user;
-    const { id } = req.params;
-    const result = await BookingServices.deleteBookingFromDB(id, email);
-    if (result) {
-        sendResponse(res, {
-          success: true,
-          statusCode: httpStatus.OK,
-          message: 'Booking deleted successfully',
-          data: result,
-        });
-      }
-})
+const getBookingsByUser: RequestHandler = catchAsync(async (req, res) => {
+  const { email } = req.user;
+  const result = await BookingServices.getBookingsByUserFromDB(email);
+  if (result) {
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: 'User bookings retrieved successfully',
+      data: result,
+    });
+  }
+});
+const deleteBooking: RequestHandler = catchAsync(async (req, res) => {
+  const { email } = req.user;
+  const { id } = req.params;
+  const result = await BookingServices.deleteBookingFromDB(id, email);
+  if (result) {
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: 'Booking deleted successfully',
+      data: result,
+    });
+  }
+});
 export const BookingControllers = {
   createBooking,
   getAllBookings,
   getBookingsByUser,
   updateBooking,
-  deleteBooking
+  deleteBooking,
 };

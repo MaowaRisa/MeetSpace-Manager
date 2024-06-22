@@ -24,5 +24,5 @@ const getAvailableSlots: RequestHandler = catchAsync(async (req, res) => {
 });
 export const SlotControllers = {
   createSlot,
-  getAvailableSlots
+  getAvailableSlots,
 };

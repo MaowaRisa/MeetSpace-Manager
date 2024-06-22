@@ -325,22 +325,25 @@ const deleteBookingFromDB = async (bookingId: string, email: string) => {
   try {
     session.startTransaction();
     const result = await Booking.findByIdAndUpdate(
-        {_id: bookingId},
-        { isDeleted: true },
-        { new: true, session },
+      { _id: bookingId },
+      { isDeleted: true },
+      { new: true, session },
     ).select(selectedFieldsForBooking);
 
-    if(!result){
-        throw new AppError(httpStatus.BAD_REQUEST, 'Failed to delete booking');
+    if (!result) {
+      throw new AppError(httpStatus.BAD_REQUEST, 'Failed to delete booking');
     }
     // slots booking status
     const slotsBooked = await Slot.updateMany(
-        { _id: { $in: isBookingExists.slots } },
-        { $set: { isBooked: false } },
-        { session },
+      { _id: { $in: isBookingExists.slots } },
+      { $set: { isBooked: false } },
+      { session },
     );
-    if(!slotsBooked){
-        throw new AppError(httpStatus.BAD_REQUEST, 'Failed to update slots booking status');
+    if (!slotsBooked) {
+      throw new AppError(
+        httpStatus.BAD_REQUEST,
+        'Failed to update slots booking status',
+      );
     }
     await session.commitTransaction();
     await session.endSession();
@@ -348,9 +351,11 @@ const deleteBookingFromDB = async (bookingId: string, email: string) => {
   } catch (error) {
     await session.abortTransaction();
     await session.endSession();
-    throw new AppError(httpStatus.INTERNAL_SERVER_ERROR, "Transaction aborted!")
+    throw new AppError(
+      httpStatus.INTERNAL_SERVER_ERROR,
+      'Transaction aborted!',
+    );
   }
-  
 };
 export const BookingServices = {
   createBookingIntoDB,

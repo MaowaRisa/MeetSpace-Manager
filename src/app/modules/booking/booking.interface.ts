@@ -12,5 +12,9 @@ export interface IBooking {
 }
 export interface BookingModel extends Model<IBooking> {
   isBookingExists(id: string): Promise<IBooking | null>;
-  isUserBookingExists(userId: string, date: string, slots: string[] ): Promise<IBooking[] | []>;
+  isUserBookingExists(
+    userId: string,
+    date: string,
+    slots: string[],
+  ): Promise<IBooking[] | []>;
 }

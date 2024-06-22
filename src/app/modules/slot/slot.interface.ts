@@ -10,7 +10,7 @@ export interface SlotModel extends Model<TSlot> {
   isSlotExists(id: string): Promise<TSlot | null>;
 }
 export type QueryParameters = {
-    date?: string;
-    room?: string;
-    isBooked: boolean;
-}
+  date?: string;
+  room?: string;
+  isBooked: boolean;
+};

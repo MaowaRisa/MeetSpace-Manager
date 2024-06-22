@@ -59,14 +59,13 @@ export async function checkRoomAndDateInSlots(
   date: string,
   slots: string[],
 ) {
-   
   const foundSlots = await Slot.find({
     _id: { $in: slots },
     room: roomId,
     isBooked: false,
     date: date,
   });
-//   console.log('this', foundSlots);
+  //   console.log('this', foundSlots);
   const foundSlotsIds = foundSlots.map((slot) => slot._id.toString());
   const missingSlotsIds = slots.filter(
     (slotId) => !foundSlotsIds.includes(slotId.toString()),
@@ -74,13 +73,16 @@ export async function checkRoomAndDateInSlots(
 
   return { foundSlotsIds, missingSlotsIds };
 }
- // Function to compare two arrays of ObjectIds
- export const arraysHaveSameObjectIds = (arr1: Array<string | Types.ObjectId>, arr2: Array<string | Types.ObjectId>) => {
+// Function to compare two arrays of ObjectIds
+export const arraysHaveSameObjectIds = (
+  arr1: Array<string | Types.ObjectId>,
+  arr2: Array<string | Types.ObjectId>,
+) => {
   if (arr1.length !== arr2.length) return false;
 
   // Convert each ObjectId to a string
-  const arr1Strings = arr1.map(id => id.toString());
-  const arr2Strings = arr2.map(id => id.toString());
+  const arr1Strings = arr1.map((id) => id.toString());
+  const arr2Strings = arr2.map((id) => id.toString());
 
   // Sort the arrays
   arr1Strings.sort();
