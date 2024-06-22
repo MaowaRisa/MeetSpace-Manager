@@ -1,117 +1,149 @@
-# Meet Space Project
-This is a straightforward Express application designed to manage meetup and registration functionalities. It offers an API for creating, reading, updating, deleting, and searching meetups and registrations, utilizing Express and MongoDB using Mongoose. Additionally, ESLint and Prettier have been employed for code quality and formatting.
+# MeetSpace Manager
 
-# Project API for Meetups and Registrations Management
-Project live link:
-https://meet-space.vercel.app/
+## Overview
+This project provides a RESTful API for managing user registrations, room bookings, and scheduling time slots in a room booking system. The API includes endpoints for user authentication, room management, slot management, and booking management, with role-based access control for different actions.
 
-Meetups
-Create new meetups (POST)
-https://meet-space.vercel.app/api/meetups
-Retrieve all meetups
-https://meet-space.vercel.app/api/meetups
-Search for meetups by title, description, and category
-https://meet-space.vercel.app/api/meetups?searchTerm=Tech
-Update meetup
-https://meet-space.vercel.app/api/meetups/meetupId
-Delete meetup
-https://meet-space.vercel.app/api/meetups/meetupId
-Registrations
-Create new registration (POST)
-https://meet-space.vercel.app/api/registrations
-Retrieve all registrations
-https://meet-space.vercel.app/api/registrations
-Get registrations for a specific email
-https://meet-space.vercel.app/api/registrations?email=email
-What You Need to Run This App
-Node JS (used version: v20.11.1)
-NPM or any package manager
-Express
-MongoDB
-Installation Process
-Clone the repository using command git clone <repository URL>.
-Install the dependencies using command npm install.
-Create a .env file in the root directory and add your port, database connection string.
-Run the Project Using Scripts from package.json
-Using Node:
-For creating the dist files in js
-arduino
-Copy code
-npm run build
-To run the server using node
-bash
-Copy code
-node ./dist/server.ts
-Using the script
-arduino
-Copy code
-npm run start:prod // Production
-Using ts-node-dev
-arduino
-Copy code
-npm run start:dev // development
-Linting
-To check the errors
+### Project overview Video Link : https://www.youtube.com/watch?v=D6_CtVC-V1Q
 
-arduino
-Copy code
-npm run lint
-For fixing the errors
+## Features
+1. User authentication (sign up and login)
+2. Role-based access control (Admin and User roles)
+3. CRUD operations for rooms
+4. Slot creation and availability checking
+5. Room booking management
 
-arduino
-Copy code
-npm run lint:fix
-Formatting
-To format the code using prettier
+## Technology Stack
+* Node.js
+* Express.js
+* MongoDB
+* JWT (JSON Web Tokens) for authentication
+* Mongoose (for MongoDB object modeling)
 
-arduino
-Copy code
-npm run prettier
-To fix the formatting
+## Getting Started
+Prerequisites
+Make sure you have the following installed:
 
-arduino
-Copy code
-npm run prettier:fix
-Best Practices and Guidelines
-Coding Quality
-Clean and Modular Code
+* Node.js
+* MongoDB
+
+## Installation
+1. Clone the repository:
+
+```git clone https://github.com/MaowaRisa/MeetSpace-Manager.git```
+2. Install dependencies:
+```cd MeetSpace-Manager```
+```npm install```
+3. Set up environment variables:
+Create a .env file in the root directory and add the following variables:
+
+`NODE_ENV=development`
+`PORT=5000`
+`DATABASE_URL=mongodb://localhost:27017/roomBookingDB`
+`JWT_ACCESS_SECRET=your_jwt_secret`
+`JWT_ACCESS_EXPIRES_IN=10d`
+`BCRYPT_SALT_ROUNDS= `
+4. Start the server:
+
+`npm start`
+The API will be available at http://localhost:5000.
+
+## Usage
+1. User Routes
+* Sign Up
+Route: /api/auth/signup
+Method: POST
+
+* Login
+Route: /api/auth/login
+Method: POST
+
+2. Room Routes
+* Create Room
+Route: /api/rooms
+Method: POST
+* Get All Rooms
+Route: /api/rooms
+Method: GET
+* Get Room by ID
+
+Route: /api/rooms/:id
+Method: GET
+* Update Room
+
+Route: /api/rooms/:id
+Method: PUT
+* Delete Room
+
+Route: /api/rooms/:id
+Method: DELETE
+3. Slot Routes
+* Create Slot
+
+Route: /api/slots
+Method: POST
+* Get Available Slots
+
+Route: /api/slots/available
+Method: GET
+4. Booking Routes
+* Create Booking
+
+Route: /api/bookings
+Method: POST
+* Get User Bookings
+
+Route: /api/bookings/user
+Method: GET
+
+## Authorization
+The API uses JSON Web Tokens (JWT) for authentication and authorization. Users must include a valid JWT token in the Authorization header of requests to access protected routes. Different roles (Admin and User) have different levels of access to various endpoints.
+
+## Linting 
+to check the errors
+```npm run lint```
+for fix use 
+```npm run lint:fix```
+
+# Formatting
+format the code using prettier
+```npm run prettier```
+to fix
+```npm run prettier:fix```
+
+In this project, I have meticulously followed several best practices and guidelines to ensure high-quality code:
+
+### Coding Quality
+#### Clean and Modular Code: 
 The code is organized into modular components, each responsible for a specific functionality.
-
-Consistent Naming Conventions
+#### Consistent Naming Conventions: 
 Variables, functions, and routes are named consistently and meaningfully to reflect their purpose.
-
-Readability
+#### Readability: 
 Efforts have been made to ensure the code is easily readable and maintainable.
 
-Inline Comments
+#### Inline Comments: 
 Complex sections of code or logic are accompanied by inline comments to enhance understanding.
 
-API Endpoint Adherence
-Strict Adherence to Structure
+### API Endpoint Adherence
+#### Strict Adherence to Structure: 
 The API endpoints strictly follow the provided structure and naming conventions.
-
-Request and Response Formats
+#### Request and Response Formats: 
 All request and response formats match the specifications outlined in the assignment.
 
-Validation and Error Handling
-Validation
-Implemented validation using Zod for both meetup and registration data.
-
-Graceful Error Handling
+### Validation and Error Handling
+#### Validation: 
+Implemented validation using Zod for both product and order data.
+#### Graceful Error Handling: 
 Validation errors are handled gracefully, providing meaningful error messages in API responses.
+#### Specific Error Scenarios: 
+Error handling is implemented for scenarios such as product not found and validation errors.
 
-Specific Error Scenarios
-Error handling is implemented for scenarios such as meetup not found and validation errors.
-
-Coding Tools and Libraries
-Manual Code Writing
+### Coding Tools and Libraries
+#### Manual Code Writing: 
 No AI tools or libraries were used for generating code. All code is written manually to demonstrate a clear understanding of the concepts.
 
-Specified Libraries
+#### Specified Libraries: 
 Only specified libraries like Express, Mongoose, and Zod are used, avoiding unnecessary dependencies.
 
-Commit History
-The GitHub repository contains commits, documenting the development process. The project maintains a high standard of coding quality, readability, and functionality.
 
-Author
-Maowa Risa
+### Commit History:
+The GitHub repository contains commits, documenting the development process.The project maintains a high standard of coding quality, readability, and functionality.
