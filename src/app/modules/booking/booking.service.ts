@@ -32,7 +32,7 @@ const createBookingIntoDB = async (email: string, payload: IBooking) => {
   if (missingSlots.length > 0) {
     throw new AppError(
       httpStatus.NOT_FOUND,
-      `${missingSlots.join(',')} slots already booked!`,
+      `${missingSlots.join(',')} slots are not available!`,
     );
   }
   // Room exist
