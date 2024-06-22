@@ -19,6 +19,17 @@ router.get(
   auth(USER_ROLE.admin),
   BookingControllers.getAllBookings
 );
+router.put(
+  '/:id',
+  auth(USER_ROLE.admin),
+  validateRequest(BookingValidationSchema.updateBookingValidationSchema),
+  BookingControllers.updateBooking
+);
+router.delete(
+  '/:id',
+  auth(USER_ROLE.admin),
+  BookingControllers.deleteBooking
+);
 const userBookingRoutes = express.Router();
 userBookingRoutes.get(
   '/',

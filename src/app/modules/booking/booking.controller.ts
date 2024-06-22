@@ -16,6 +16,19 @@ const createBooking: RequestHandler = catchAsync(async (req, res) => {
     });
   }
 });
+const updateBooking: RequestHandler = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const { email } = req.user;
+  const result = await BookingServices.updateBookingIntoDB(id, email, req.body);
+  if (result) {
+    sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: 'Booking updated successfully',
+      data: result,
+    });
+  }
+});
 const getAllBookings: RequestHandler = catchAsync(async (req, res) => {
   const result = await BookingServices.getAllBookingsFromDB();
   if (result) {
@@ -39,8 +52,23 @@ const getBookingsByUser: RequestHandler = catchAsync(async (req, res) =>{
         });
       }
 })
+const deleteBooking: RequestHandler = catchAsync(async (req, res) =>{
+    const {email} = req.user;
+    const { id } = req.params;
+    const result = await BookingServices.deleteBookingFromDB(id, email);
+    if (result) {
+        sendResponse(res, {
+          success: true,
+          statusCode: httpStatus.OK,
+          message: 'Booking deleted successfully',
+          data: result,
+        });
+      }
+})
 export const BookingControllers = {
   createBooking,
   getAllBookings,
-  getBookingsByUser
+  getBookingsByUser,
+  updateBooking,
+  deleteBooking
 };
