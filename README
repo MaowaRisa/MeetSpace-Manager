@@ -1,0 +1,117 @@
+# Meet Space Project
+This is a straightforward Express application designed to manage meetup and registration functionalities. It offers an API for creating, reading, updating, deleting, and searching meetups and registrations, utilizing Express and MongoDB using Mongoose. Additionally, ESLint and Prettier have been employed for code quality and formatting.
+
+# Project API for Meetups and Registrations Management
+Project live link:
+https://meet-space.vercel.app/
+
+Meetups
+Create new meetups (POST)
+https://meet-space.vercel.app/api/meetups
+Retrieve all meetups
+https://meet-space.vercel.app/api/meetups
+Search for meetups by title, description, and category
+https://meet-space.vercel.app/api/meetups?searchTerm=Tech
+Update meetup
+https://meet-space.vercel.app/api/meetups/meetupId
+Delete meetup
+https://meet-space.vercel.app/api/meetups/meetupId
+Registrations
+Create new registration (POST)
+https://meet-space.vercel.app/api/registrations
+Retrieve all registrations
+https://meet-space.vercel.app/api/registrations
+Get registrations for a specific email
+https://meet-space.vercel.app/api/registrations?email=email
+What You Need to Run This App
+Node JS (used version: v20.11.1)
+NPM or any package manager
+Express
+MongoDB
+Installation Process
+Clone the repository using command git clone <repository URL>.
+Install the dependencies using command npm install.
+Create a .env file in the root directory and add your port, database connection string.
+Run the Project Using Scripts from package.json
+Using Node:
+For creating the dist files in js
+arduino
+Copy code
+npm run build
+To run the server using node
+bash
+Copy code
+node ./dist/server.ts
+Using the script
+arduino
+Copy code
+npm run start:prod // Production
+Using ts-node-dev
+arduino
+Copy code
+npm run start:dev // development
+Linting
+To check the errors
+
+arduino
+Copy code
+npm run lint
+For fixing the errors
+
+arduino
+Copy code
+npm run lint:fix
+Formatting
+To format the code using prettier
+
+arduino
+Copy code
+npm run prettier
+To fix the formatting
+
+arduino
+Copy code
+npm run prettier:fix
+Best Practices and Guidelines
+Coding Quality
+Clean and Modular Code
+The code is organized into modular components, each responsible for a specific functionality.
+
+Consistent Naming Conventions
+Variables, functions, and routes are named consistently and meaningfully to reflect their purpose.
+
+Readability
+Efforts have been made to ensure the code is easily readable and maintainable.
+
+Inline Comments
+Complex sections of code or logic are accompanied by inline comments to enhance understanding.
+
+API Endpoint Adherence
+Strict Adherence to Structure
+The API endpoints strictly follow the provided structure and naming conventions.
+
+Request and Response Formats
+All request and response formats match the specifications outlined in the assignment.
+
+Validation and Error Handling
+Validation
+Implemented validation using Zod for both meetup and registration data.
+
+Graceful Error Handling
+Validation errors are handled gracefully, providing meaningful error messages in API responses.
+
+Specific Error Scenarios
+Error handling is implemented for scenarios such as meetup not found and validation errors.
+
+Coding Tools and Libraries
+Manual Code Writing
+No AI tools or libraries were used for generating code. All code is written manually to demonstrate a clear understanding of the concepts.
+
+Specified Libraries
+Only specified libraries like Express, Mongoose, and Zod are used, avoiding unnecessary dependencies.
+
+Commit History
+The GitHub repository contains commits, documenting the development process. The project maintains a high standard of coding quality, readability, and functionality.
+
+Author
+Maowa Risa
